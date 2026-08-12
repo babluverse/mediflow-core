@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import authRoutes from './src/routes/auth.routes.js';
+import tokenRoutes from './src/routes/token.routes.js';
+import doctorRoutes from './src/routes/doctor.routes.js';
 
 dotenv.config();
 
@@ -17,6 +20,10 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+app.use('/api/auth', authRoutes);
+app.use('/api/tokens', tokenRoutes);
+app.use('/api/doctors', doctorRoutes);
 
 app.listen(PORT, () => {
   console.log(`MediFlow server running on port ${PORT}`);
